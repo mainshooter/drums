@@ -1,4 +1,4 @@
-var keys;
+
 var sounds = {
   'a':'clap',
   's': 'hihat',
@@ -11,16 +11,20 @@ var sounds = {
   'l':'tink',
 };
 
+/**
+ * Runs at the start of our script
+ * Adds a eventlistner for all the keys
+ */
 (function() {
-  keys = document.querySelectorAll('div[data-key]');
-  for (var i = 0; i < keys.length; i++) {
-
-  }
   document.addEventListener('keydown', function() {
     drumHandler(event)
   });
 })();
 
+/**
+ * Controlls the drum sound and the highligth of the key
+ * @param  {[obj]} event [The event object]
+ */
 function drumHandler(event) {
   if (sounds[event.key] != null) {
     playSound('sounds/' + sounds[event.key] + '.wav');
@@ -33,23 +37,28 @@ function drumHandler(event) {
   }
 }
 
+/**
+ * Highlight the key
+ * @param  {[int]} key_code [The code of the key]
+ */
 function highlight_key(key_code) {
   let key = document.querySelector('div[data-key="' + key_code + '"]');
-
-  if (key != null) {
-    // We have a key
     key.className = 'key playing';
-  }
 }
+
+/**
+ * Removes the highlight from a key
+ * @param  {[int]} key_code [The code of a key]
+ */
 function disable_highlite(key_code) {
   let key = document.querySelector('div[data-key="' + key_code + '"]');
-
-  if (key != null) {
-    // We have a key
     key.className = 'key';
-  }
 }
 
+/**
+ * Plays the sound of the audio file
+ * @param  {[string]} audio_file [The location of the audio file]
+ */
 function playSound(audio_file) {
     let audio = new Audio(audio_file);
     audio.play();
